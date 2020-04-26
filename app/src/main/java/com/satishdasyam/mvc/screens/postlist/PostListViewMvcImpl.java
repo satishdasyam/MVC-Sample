@@ -1,7 +1,9 @@
 package com.satishdasyam.mvc.screens.postlist;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,11 +20,13 @@ public class PostListViewMvcImpl extends BaseObservableViewMvc<IPostListViewMvc.
 
     private PostListAdapter mPostAdapter;
     private RecyclerView mRvPostList;
+    private ProgressBar mPbProgressBar;
 
 
     public PostListViewMvcImpl(LayoutInflater layoutInflater, ViewGroup parent, ViewMvcFactory viewMvcFactory) {
         setRootView(layoutInflater.inflate(R.layout.activity_main, parent));
         mRvPostList = findViewById(R.id.rv_post_list);
+        mPbProgressBar = findViewById(R.id.pb_progress_bar);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvPostList.setLayoutManager(linearLayoutManager);
@@ -40,5 +44,15 @@ public class PostListViewMvcImpl extends BaseObservableViewMvc<IPostListViewMvc.
         for (Listener listener : getListeners()) {
             listener.onPostClicked(post);
         }
+    }
+
+    @Override
+    public void showProgressIndication() {
+        mPbProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressIndication() {
+        mPbProgressBar.setVisibility(View.GONE);
     }
 }

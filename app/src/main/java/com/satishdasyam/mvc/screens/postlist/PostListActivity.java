@@ -4,19 +4,13 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.satishdasyam.mvc.common.BaseActivity;
-import com.satishdasyam.mvc.networking.RestService;
 import com.satishdasyam.mvc.networking.posts.PostListUseCase;
-import com.satishdasyam.mvc.networking.posts.PostSchema;
 import com.satishdasyam.mvc.posts.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class PostListActivity extends BaseActivity implements IPostListViewMvc.Listener {
+public class PostListActivity extends BaseActivity implements IPostListViewMvc.Listener,
+        PostListUseCase.Listener {
 
     IPostListViewMvc mPostListViewMvc;
     PostListUseCase mPostListUseCase;
@@ -25,10 +19,7 @@ public class PostListActivity extends BaseActivity implements IPostListViewMvc.L
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPostListViewMvc = getCompositionRoot().getViewMvcFactory().getPostListViewMvc(null);
-        mPostListViewMvc.registerListener(this);
-        mPostListUseCase = new PostListUseCase();
-        //mPostListUseCase.fetchPostList();
-        fetchPostList(getCompositionRoot().getApi());
+        mPostListUseCase = getCompositionRoot().getPostListUseCase();
         setContentView(mPostListViewMvc.getRootView());
     }
 
@@ -37,24 +28,20 @@ public class PostListActivity extends BaseActivity implements IPostListViewMvc.L
         Toast.makeText(getApplicationContext(), post.getPostTitle(), Toast.LENGTH_SHORT).show();
     }
 
-    public void fetchPostList(RestService api) {
-        api.fetchPosts().enqueue(new Callback<List<PostSchema>>() {
-            @Override
-            public void onResponse(Call<List<PostSchema>> call, Response<List<PostSchema>> response) {
-                List<PostSchema> schemaList = response.body();
-                List<Post> postList = new ArrayList<>();
-                for (PostSchema postSchema : schemaList) {
-                    postList.add(new Post(postSchema.getUserId(),
-                            postSchema.getId(), postSchema.getTitle()));
-                }
-                mPostListViewMvc.bindPosts(postList);
-            }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mPostListViewMvc.registerListener(this);
+        mPostListUseCase.registerListener(this);
+        mPostListViewMvc.showProgressIndication();
+        mPostListUseCase.fetchPostList();
+    }
 
-            @Override
-            public void onFailure(Call<List<PostSchema>> call, Throwable t) {
-
-            }
-        });
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPostListViewMvc.unregisterListener(this);
+        mPostListUseCase.unregisterListener(this);
     }
 
     @Override
@@ -63,4 +50,15 @@ public class PostListActivity extends BaseActivity implements IPostListViewMvc.L
         mPostListViewMvc.unregisterListener(this);
     }
 
+    @Override
+    public void onPostListFetched(List<Post> posts) {
+        mPostListViewMvc.bindPosts(posts);
+        mPostListViewMvc.hideProgressIndication();
+    }
+
+    @Override
+    public void onPostListFetchFailed() {
+        mPostListViewMvc.hideProgressIndication();
+        Toast.makeText(getApplicationContext(), "Fetching failed", Toast.LENGTH_SHORT).show();
+    }
 }

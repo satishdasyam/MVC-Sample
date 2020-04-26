@@ -13,4 +13,8 @@ public interface IPostListViewMvc extends IObservableViewMvc<IPostListViewMvc.Li
 
     void bindPosts(List<Post> postList);
 
+    void showProgressIndication();
+
+    void hideProgressIndication();
+
 }

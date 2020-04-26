@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.satishdasyam.mvc.networking.RestService;
+import com.satishdasyam.mvc.networking.posts.PostListUseCase;
 import com.satishdasyam.mvc.screens.common.ViewMvcFactory;
 
 public class ControllerCompositionRoot {
@@ -17,7 +18,7 @@ public class ControllerCompositionRoot {
         mActivity = activity;
     }
 
-    public RestService getApi() {
+    private RestService getApi() {
         return mCompositionRoot.getApi();
     }
 
@@ -29,4 +30,7 @@ public class ControllerCompositionRoot {
         return new ViewMvcFactory(getLayoutInflater());
     }
 
+    public PostListUseCase getPostListUseCase() {
+        return new PostListUseCase(getApi());
+    }
 }

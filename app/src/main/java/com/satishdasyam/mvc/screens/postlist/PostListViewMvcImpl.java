@@ -10,22 +10,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.satishdasyam.mvc.R;
 import com.satishdasyam.mvc.posts.Post;
-import com.satishdasyam.mvc.screens.common.BaseObservableViewMvc;
 import com.satishdasyam.mvc.screens.common.ViewMvcFactory;
 
 import java.util.List;
 
-public class PostListViewMvcImpl extends BaseObservableViewMvc<IPostListViewMvc.Listener>
-        implements IPostListViewMvc, PostListAdapter.Listener {
+public class PostListViewMvcImpl extends PostListViewMvc implements  PostListAdapter.Listener {
 
     private PostListAdapter mPostAdapter;
-    private RecyclerView mRvPostList;
     private ProgressBar mPbProgressBar;
 
 
     public PostListViewMvcImpl(LayoutInflater layoutInflater, ViewGroup parent, ViewMvcFactory viewMvcFactory) {
         setRootView(layoutInflater.inflate(R.layout.activity_main, parent));
-        mRvPostList = findViewById(R.id.rv_post_list);
+        RecyclerView mRvPostList = findViewById(R.id.rv_post_list);
         mPbProgressBar = findViewById(R.id.pb_progress_bar);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

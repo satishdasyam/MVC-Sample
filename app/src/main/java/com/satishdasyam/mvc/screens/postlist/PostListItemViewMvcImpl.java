@@ -8,10 +8,8 @@ import android.widget.TextView;
 
 import com.satishdasyam.mvc.R;
 import com.satishdasyam.mvc.posts.Post;
-import com.satishdasyam.mvc.screens.common.BaseObservableViewMvc;
 
-public class PostListItemViewMvcImpl extends BaseObservableViewMvc<IPostListItemViewMvc.Listener>
-        implements IPostListItemViewMvc {
+public class PostListItemViewMvcImpl extends PostListItemViewMvc {
 
     private TextView mTvPostTitle;
     private TextView mTvUserId;

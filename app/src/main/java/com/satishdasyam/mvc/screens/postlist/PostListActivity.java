@@ -9,10 +9,10 @@ import com.satishdasyam.mvc.posts.Post;
 
 import java.util.List;
 
-public class PostListActivity extends BaseActivity implements IPostListViewMvc.Listener,
+public class PostListActivity extends BaseActivity implements PostListViewMvc.Listener,
         PostListUseCase.Listener {
 
-    IPostListViewMvc mPostListViewMvc;
+    PostListViewMvc mPostListViewMvc;
     PostListUseCase mPostListUseCase;
 
     @Override

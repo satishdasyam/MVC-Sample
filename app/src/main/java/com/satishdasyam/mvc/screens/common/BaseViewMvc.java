@@ -3,11 +3,10 @@ package com.satishdasyam.mvc.screens.common;
 import android.content.Context;
 import android.view.View;
 
-public abstract class BaseViewMvc implements IViewMvc {
+public abstract class BaseViewMvc {
 
     private View mRootView ;
 
-    @Override
     public View getRootView() {
         return mRootView;
     }

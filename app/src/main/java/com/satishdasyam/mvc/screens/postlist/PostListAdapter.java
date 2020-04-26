@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostViewHolder>
-        implements IPostListItemViewMvc.Listener {
+        implements PostListItemViewMvc.Listener {
 
     interface Listener {
         void onPostClicked(Post post);
@@ -30,7 +30,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        IPostListItemViewMvc postListItemViewMvc = mViewMvcFactory.getPostListItemViewMvc(parent);
+        PostListItemViewMvc postListItemViewMvc = mViewMvcFactory.getPostListItemViewMvc(parent);
         postListItemViewMvc.registerListener(this);
         return new PostViewHolder(postListItemViewMvc);
     }
@@ -46,9 +46,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
-        final IPostListItemViewMvc itemViewMvc;
+        final PostListItemViewMvc itemViewMvc;
 
-        PostViewHolder(@NonNull IPostListItemViewMvc itemView) {
+        PostViewHolder(@NonNull PostListItemViewMvc itemView) {
             super(itemView.getRootView());
             itemViewMvc = itemView;
         }

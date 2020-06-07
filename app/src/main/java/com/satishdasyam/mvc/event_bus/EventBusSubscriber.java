@@ -2,7 +2,7 @@ package com.satishdasyam.mvc.event_bus;
 
 import org.greenrobot.eventbus.EventBus;
 
-/**This class is used to subscribe to event bus events, maintained separate class
+/**This class is used to subscribe event bus events, maintained separate class
  * for subscribing and posting events so that we are clear in dependencies
  * which class are subscribing and which are posting*/
 

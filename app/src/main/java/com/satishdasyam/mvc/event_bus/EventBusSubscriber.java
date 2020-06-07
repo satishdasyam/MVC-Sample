@@ -9,11 +9,16 @@ import org.greenrobot.eventbus.EventBus;
 
 public class EventBusSubscriber {
 
+    private final EventBus mEventBus;
+    public EventBusSubscriber(EventBus eventBus) {
+        mEventBus = eventBus;
+    }
+
     public void register(Object subscriber) {
-        EventBus.getDefault().register(subscriber);
+        mEventBus.register(subscriber);
     }
 
     public void unRegister(Object subscriber) {
-        EventBus.getDefault().unregister(subscriber);
+        mEventBus.unregister(subscriber);
     }
 }

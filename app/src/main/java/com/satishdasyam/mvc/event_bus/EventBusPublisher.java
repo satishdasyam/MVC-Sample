@@ -7,7 +7,12 @@ import org.greenrobot.eventbus.EventBus;
  * which class are subscribing and which are posting*/
 public class EventBusPublisher {
 
+    private final EventBus mEventBus;
+    public EventBusPublisher(EventBus eventBus) {
+        mEventBus = eventBus;
+    }
+
     public void post(Object event) {
-        EventBus.getDefault().post(event);
+        mEventBus.post(event);
     }
 }

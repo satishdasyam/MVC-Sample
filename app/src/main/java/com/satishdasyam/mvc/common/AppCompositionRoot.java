@@ -5,7 +5,7 @@ import com.satishdasyam.mvc.networking.RestService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-class CompositionRoot {
+class AppCompositionRoot {
 
     private RestService mRestService;
 

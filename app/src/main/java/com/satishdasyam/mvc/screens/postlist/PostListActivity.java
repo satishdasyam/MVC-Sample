@@ -45,12 +45,6 @@ public class PostListActivity extends BaseActivity implements PostListViewMvc.Li
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPostListViewMvc.unregisterListener(this);
-    }
-
-    @Override
     public void onPostListFetched(List<Post> posts) {
         mPostListViewMvc.bindPosts(posts);
         mPostListViewMvc.hideProgressIndication();

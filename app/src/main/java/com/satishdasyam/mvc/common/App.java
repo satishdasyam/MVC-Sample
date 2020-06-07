@@ -4,15 +4,15 @@ import android.app.Application;
 
 public class App extends Application {
 
-    private CompositionRoot mCompositionRoot;
+    private AppCompositionRoot mCompositionRoot;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mCompositionRoot = new CompositionRoot();
+        mCompositionRoot = new AppCompositionRoot();
     }
 
-    public CompositionRoot getCompositionRoot() {
+    public AppCompositionRoot getCompositionRoot() {
         return mCompositionRoot;
     }
 

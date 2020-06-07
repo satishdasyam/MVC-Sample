@@ -10,10 +10,10 @@ import com.satishdasyam.mvc.screens.common.ViewMvcFactory;
 
 public class ControllerCompositionRoot {
 
-    private final CompositionRoot mCompositionRoot;
+    private final AppCompositionRoot mCompositionRoot;
     private final AppCompatActivity mActivity;
 
-    public ControllerCompositionRoot(CompositionRoot compositionRoot, AppCompatActivity activity) {
+    public ControllerCompositionRoot(AppCompositionRoot compositionRoot, AppCompatActivity activity) {
         mCompositionRoot = compositionRoot;
         mActivity = activity;
     }
